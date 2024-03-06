@@ -1,4 +1,4 @@
-=
+
 const IndexPage = () => {
   return (
     <div>
