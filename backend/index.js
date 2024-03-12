@@ -43,7 +43,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
@@ -58,7 +57,7 @@ app.post("/login", async (req, res) => {
           if (err) {
             throw err;
           }
-          res.cookie("token", token).json("pass ok");
+          res.cookie("token", token).json(userDoc);
         }
       );
     } else {
@@ -67,6 +66,11 @@ app.post("/login", async (req, res) => {
   } else {
     res.json("user not found");
   }
+});
+
+app.get("/profile", (req, res) => {
+  const { token } = req.cookie;
+  res.json({token});
 });
 
 app.listen(8080);
